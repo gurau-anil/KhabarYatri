@@ -1,0 +1,86 @@
+﻿@model KhabarYatri.WebUI.ViewModels.PostAndSameCatRecommendationViewModel
+
+@{
+    ViewBag.Title = "Post Detail";
+}
+
+<div class="wrapper">
+    <div>
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <div class="post-detail">
+                <header class="post-title h4 text-center">
+                    <strong>@Model.Post.PostTitle</strong>
+                </header>
+                <article class="post-body">
+                    @Model.Post.PostBody
+                </article>
+                <div class="post-image">
+                    <img src="~/Content/Images/@Model.Post.Image" class="center-block" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    @*<div class="container">
+            @foreach (var item in Model.RecommendPosts)
+            {
+                <div class="col-md-3">
+                    <div>
+                        @item.PostTitle
+                    </div>
+                    <div>
+                        <img src="~/Content/Images/@item.Image" height="200" />
+                    </div>
+                </div>
+            }
+        </div>*@
+
+    @if (Model.RecommendPosts.Count() != 0)
+    {
+        <div class="h3 col-md-offset-2 col-md-8 text-center">
+            <strong style="color:#808080; text-decoration:underline; padding:10px; display:inline-block;">
+                <p>Posts you may like</p>
+            </strong>
+        </div>
+        <div class="clearfix"></div>
+        <div class="recommendation">
+            <div class="col-md-2"></div>
+            <div class="same-cat-posts col-md-8">
+                @foreach (var item in Model.RecommendPosts)
+                {
+                    <div class="same-cat-post col-md-6">
+                        <div class="same-cat-post-post" style="margin-bottom:10px;">
+                            <div class="same-cat-post-title h6 align-middle">
+                                @item.PostTitle
+                            </div>
+                            <a href="@Url.Action("PostDetail","khabaryatri",new {id=item.PostId})">
+                                <div class="same-cat-post-image">
+                                    <img src="~/Content/Images/@item.Image" class="center-block" />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-2"></div>
+            <div class="clearfix"></div>
+        </div>
+    }
+    else
+    {
+        <div class="h3 col-md-12 text-center">
+            <strong style="color:#d8d5d5; padding:10px; display:block;">
+                <p> No recommendations</p>
+            </strong>
+        </div>
+    }
+
+
+</div>

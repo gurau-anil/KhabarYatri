@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E03783A4-46FA-4A2A-AC25-9D504B5CCAB8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KhabarYatri.SQL</RootNamespace>
+    <AssemblyName>KhabarYatri.SQL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataContext.cs" />
+    <Compile Include="Migrations\202009231947128_InitialMigration.cs" />
+    <Compile Include="Migrations\202009231947128_InitialMigration.Designer.cs">
+      <DependentUpon>202009231947128_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009232001404_PublishedTimeRemoved.cs" />
+    <Compile Include="Migrations\202009232001404_PublishedTimeRemoved.Designer.cs">
+      <DependentUpon>202009232001404_PublishedTimeRemoved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009232005123_CommentedTimeRemoved.cs" />
+    <Compile Include="Migrations\202009232005123_CommentedTimeRemoved.Designer.cs">
+      <DependentUpon>202009232005123_CommentedTimeRemoved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009241653257_PublishedDateEdited.cs" />
+    <Compile Include="Migrations\202009241653257_PublishedDateEdited.Designer.cs">
+      <DependentUpon>202009241653257_PublishedDateEdited.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009241657265_PublishedDateEdited1.cs" />
+    <Compile Include="Migrations\202009241657265_PublishedDateEdited1.Designer.cs">
+      <DependentUpon>202009241657265_PublishedDateEdited1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009251821370_NavigationPropertyAddedInComment.cs" />
+    <Compile Include="Migrations\202009251821370_NavigationPropertyAddedInComment.Designer.cs">
+      <DependentUpon>202009251821370_NavigationPropertyAddedInComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009251922307_CommentDateTimeChanged.cs" />
+    <Compile Include="Migrations\202009251922307_CommentDateTimeChanged.Designer.cs">
+      <DependentUpon>202009251922307_CommentDateTimeChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010140557283_ImageAddedToPostEntity.cs" />
+    <Compile Include="Migrations\202010140557283_ImageAddedToPostEntity.Designer.cs">
+      <DependentUpon>202010140557283_ImageAddedToPostEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KhabarYatri.Base\KhabarYatri.Base.csproj">
+      <Project>{7C9753AA-F637-49AA-B07D-4A4304FE761D}</Project>
+      <Name>KhabarYatri.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202009231947128_InitialMigration.resx">
+      <DependentUpon>202009231947128_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009232001404_PublishedTimeRemoved.resx">
+      <DependentUpon>202009232001404_PublishedTimeRemoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009232005123_CommentedTimeRemoved.resx">
+      <DependentUpon>202009232005123_CommentedTimeRemoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009241653257_PublishedDateEdited.resx">
+      <DependentUpon>202009241653257_PublishedDateEdited.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009241657265_PublishedDateEdited1.resx">
+      <DependentUpon>202009241657265_PublishedDateEdited1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009251821370_NavigationPropertyAddedInComment.resx">
+      <DependentUpon>202009251821370_NavigationPropertyAddedInComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009251922307_CommentDateTimeChanged.resx">
+      <DependentUpon>202009251922307_CommentDateTimeChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010140557283_ImageAddedToPostEntity.resx">
+      <DependentUpon>202010140557283_ImageAddedToPostEntity.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

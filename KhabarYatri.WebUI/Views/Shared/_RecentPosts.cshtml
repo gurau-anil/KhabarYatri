@@ -1,0 +1,6 @@
+﻿@model KhabarYatri.Base.Entities.Post
+
+<li class="recent-post-post">
+    <strong>@Html.ActionLink(Model.PostTitle, "PostDetail", new { id = Model.PostId })</strong>
+</li>
+<hr style="margin:10px" />

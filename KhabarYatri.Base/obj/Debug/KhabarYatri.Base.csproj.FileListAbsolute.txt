@@ -1,0 +1,5 @@
+F:\dotnet\KhabarYatri\KhabarYatri.Base\bin\Debug\KhabarYatri.Base.dll
+F:\dotnet\KhabarYatri\KhabarYatri.Base\bin\Debug\KhabarYatri.Base.pdb
+F:\dotnet\KhabarYatri\KhabarYatri.Base\obj\Debug\KhabarYatri.Base.csproj.CoreCompileInputs.cache
+F:\dotnet\KhabarYatri\KhabarYatri.Base\obj\Debug\KhabarYatri.Base.dll
+F:\dotnet\KhabarYatri\KhabarYatri.Base\obj\Debug\KhabarYatri.Base.pdb

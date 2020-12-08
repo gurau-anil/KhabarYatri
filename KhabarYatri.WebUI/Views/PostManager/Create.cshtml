@@ -1,0 +1,67 @@
+﻿@model KhabarYatri.WebUI.ViewModels.PostViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<div class="form">
+    @using (Html.BeginForm("Create","PostManager",FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Post.PostTitle, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Post.PostTitle, new { htmlAttributes = new { @class = "form-control", style = "min-width:100%;" } })
+                    @Html.ValidationMessageFor(model => model.Post.PostTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.Post.CategoryId, "Category", htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.DropDownListFor(model => model.Post.CategoryId, new SelectList(Model.Categories, "CategoryId", "Cat"), "Select catagory", new { @class = "form-control", style = "min-width:100%;" })
+                    @Html.ValidationMessageFor(model => model.Post.CategoryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Post.PostBody, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(model => model.Post.PostBody, new { @class = "form-control", rows = "10", style = "min-width:100%;" })
+                    @Html.ValidationMessageFor(model => model.Post.PostBody, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div>
+                    <input type="file" name="file" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+    <br />
+</div>
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

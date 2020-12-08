@@ -1,0 +1,238 @@
+﻿@model KhabarYatri.WebUI.ViewModels.PostCommentViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@{
+    int firstPage = 1;
+    int lastPage = Model.PagingInfo.TotalPages;
+    int previous = Model.PagingInfo.CurrentPage - 1;
+    if (previous <= 0)
+    {
+        previous = 1;
+    }
+    int next = Model.PagingInfo.CurrentPage + 1;
+    if (next > Model.PagingInfo.TotalPages)
+    {
+        next = Model.PagingInfo.TotalPages;
+    }
+}
+
+
+
+
+<div class="wrapper">
+    <div class="posts">
+        <div class="col-md-8 content-left">
+            <div class="articles">
+                @foreach (var item in Model.Posts)
+                {
+                    <div class="article">
+                        @*<header class="h2">
+                                <strong>@Html.DisplayFor(modelItem => item.Category.Cat)</strong>
+                            </header>*@
+                        <div>
+                            <div class="article-title h4">
+                                <strong>@Html.ActionLink(item.PostTitle, "PostDetail", new { id = item.PostId })</strong>
+                            </div>
+                            <div class="article-info">
+                                <span class="glyphicon glyphicon-time tag"> </span> @Html.DisplayFor(modelItem => item.PublishedDate) |
+                                <span class="glyphicon glyphicon-tag tag"> </span> @Html.ActionLink(item.Category.Cat, "PostCategories", new { category = item.Category.Cat })
+                            </div>
+                            <div class="article-image">
+                                <a href="@Url.Action("PostDetail","khabaryatri",new {id=item.PostId})"><img src="~/Content/Images/@item.Image" class="img-responsive center-block" /></a>
+                            </div>
+                            <div class="article-text">
+                                <p>@Html.DisplayFor(modelItem => item.PostBody)</p>
+                                <div class="clearfix"></div>
+                            </div>
+
+
+
+                            <div class="comment-section">
+                                <div id="form">
+                                    @using (Ajax.BeginForm(
+                                        "Home",
+                                        "khabaryatri",
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = item.PostId.ToString(),
+                                            InsertionMode = InsertionMode.InsertBefore,
+                                            OnSuccess = "clearTextArea"
+                                        },
+                                            new { id = "commentForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        //@Html.LabelFor(model => model.Comment.Cmnt, htmlAttributes: new { @class = "control-label" })
+                                    <div class="comment-box">
+                                        @Html.TextAreaFor(model => model.Comment.Cmnt, new { id = "comment-area", @class = "form-control", style = "max-width:100%;", placeholder = "comment..." })
+                                        @Html.ValidationMessageFor(model => model.Comment.Cmnt, "", new { @class = "text-danger" })
+
+                                        <input type="hidden" name="id" value="@item.PostId" />
+                                        <br/>
+                                        <input type="submit" value="comment" class="btn btn-primary" />
+                                    </div>
+                                    }
+                                </div>
+                                <br />
+
+                                <div id="@item.PostId">
+                                    @foreach (var comment in item.Comments.OrderByDescending(c => c.CommentId).Take(5))
+                                    {
+                                        @Html.Partial("_Comments", comment)
+                                    }
+                                    <hr />
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <hr />
+
+
+
+
+                }
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-4 content-right">
+            <div class="recent-posts">
+                <div class="header h4">
+                    <strong>Recent Posts</strong>
+                </div>
+                <ul class="recent-post-title" style="list-style:none;">
+                    @foreach (var item in Model.RecentPosts)
+                    {
+                        @Html.Partial("_RecentPosts", item);
+                    }
+                </ul>
+            </div>
+
+            <div class="fb-page">
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fkhabaryatri%2F&tabs=timeline&width=390&height=550&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
+                        width="500" height="700" scrolling="yes" frameborder="0" allowTransparency="true" allow="encrypted-media">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="clearfix"></div>
+
+
+
+
+    <div class="page-info">
+        @if (Model.PagingInfo.CurrentPage == 1)
+        {
+            @Html.ActionLink("Previous", "Home", "khabaryatri", new { page = previous }, new { @class = "btn btn-pagination", style = "display: none;" })
+        }
+        else
+        {
+            @Html.ActionLink("<<", "Home", "khabaryatri", new { page = firstPage }, new { @class = "btn btn-pagination" })
+            @Html.ActionLink("Previous", "Home", "khabaryatri", new { page = previous }, new { @class = "btn btn-pagination" })
+        }
+
+        @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+        {
+            if (i >= (Model.PagingInfo.CurrentPage - 2) && i <= (Model.PagingInfo.CurrentPage + 2))
+            {
+                if (i == Model.PagingInfo.CurrentPage)
+                {
+                    @Html.ActionLink(i.ToString(), "Home", "khabaryatri", new { page = i }, new { @class = "btn btn-pagination active" })
+                }
+                else
+                {
+                    @Html.ActionLink(i.ToString(), "Home", "khabaryatri", new { page = i }, new { @class = "btn btn-pagination" })
+                }
+            }
+            else
+            {
+                @Html.ActionLink(i.ToString(), "Home", "khabaryatri", new { page = i }, new { @class = "btn btn-pagination", style = "display:none;" })
+            }
+
+        }
+        @if (Model.PagingInfo.CurrentPage == Model.PagingInfo.TotalPages)
+        {
+            @Html.ActionLink("Previous", "Home", "khabaryatri", new { page = previous }, new { @class = "btn btn-pagination", style = "display: none;" })
+        }
+        else
+        {
+            @Html.ActionLink("Next", "Home", "khabaryatri", new { page = next }, new { @class = "btn btn-pagination" })
+            @Html.ActionLink(">>", "Home", "khabaryatri", new { page = lastPage }, new { @class = "btn btn-pagination", })
+        }
+    </div>
+</div>
+
+
+@*@Scripts.Render("~/bundles/customScript")*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@foreach (var item in Model.Posts)
+    {
+        //var formattedDate = item.PublishedDate.ToString("yyyy-MM-dd");
+    <div class="post row">
+        <header class="h2">
+            @Html.DisplayFor(modelItem => item.PostTitle)
+        </header>
+        <hr />
+        @Html.DisplayFor(modelItem => item.PublishedDate) | @Html.DisplayFor(modelItem => item.Category.Cat)
+        <hr />
+        <section>
+            @Html.DisplayFor(modelItem => item.PostBody)
+        </section>
+        <div class="col-md-12 form">
+            @using (Html.BeginForm("Home","khabaryatri",FormMethod.Post,new { id="commentForm"}))
+            {
+                @Html.AntiForgeryToken()
+
+                //@Html.LabelFor(model => model.Comment.Cmnt, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(model => model.Comment.Cmnt,new { @class = "form-control",style="max-width:500px;", placeholder = "comment..." })
+                    @Html.ValidationMessageFor(model => model.Comment.Cmnt, "", new { @class = "text-danger" })
+
+                    <input type="hidden" name="id" value="@item.PostId" />
+                </div>
+                <br />
+                <input type="submit" value="comment" class="btn btn-primary" />
+            }
+        </div>
+        <br />
+        @foreach (var comment in item.Comments)
+        {
+        <div>
+            <hr />
+            @Html.DisplayFor(modelItem => comment.Cmnt)
+        </div>
+        }
+        <hr />
+
+    </div>
+    }*@

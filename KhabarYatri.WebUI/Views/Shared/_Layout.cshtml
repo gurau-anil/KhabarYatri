@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/customStyle")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript">
+        function clearTextArea()
+        {
+            $("form").find("#comment-area").val("");
+        }
+
+    </script>
+
+</head>
+<body>
+    <a href="@Url.Action("Home","khabaryatri")"><img src="~/Content/Images/khabarYatripng.png" alt="Logo" style="height:100px; margin:auto;" class="img-responsive" /></a>
+    <div class="text-center">
+        <strong class="clock" id="clock" style="
+                                color: #083C60;
+                                font-size:18px;">
+        </strong>
+    </div>
+    @Html.Partial("_navbar")
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    <div class="foot container-fluid">
+        <footer class="container">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/ajax")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/customScript")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿@model KhabarYatri.WebUI.ViewModels.SameCategoryPostsViewModel
+
+@{
+    ViewBag.Title = "PostCategories";
+}
+
+<div class="wrapper">
+    <div class="h3 col-md-12 text-center">
+        <strong style="background-color:#083C60; color:#ffffff; padding:10px; display:block;">
+            @Model.Category
+        </strong>
+    </div>
+    <div class="clearfix"></div>
+    <div class="same-cat-posts">
+        @foreach (var item in Model.Posts)
+        {
+            <div class="same-cat-post">
+                <div class="col-md-3 same-cat-post-post" style="margin-bottom:20px;">
+                    <div class="same-cat-post-title h6 align-middle">
+                        @item.PostTitle
+                    </div>
+                    <a href="@Url.Action("PostDetail","khabaryatri",new {id=item.PostId})">
+                        <div class="same-cat-post-image">
+                            <img src="~/Content/Images/@item.Image" class="center-block" />
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
